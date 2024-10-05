@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BusinessObject.Car>
+
+@{
+    ViewData["Title"] = "Car List";
+}
+
+<h1>Car List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Is Available</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Type</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.Price</td>
+                <td>@car.IsAvailable</td>
+                <td><a asp-action="Details" asp-route-id="@car.CarId">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

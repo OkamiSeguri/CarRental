@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BusinessObject.Car>
+
+@{
+    ViewData["Title"] = "";
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="container mt-5">
+    @if (Model != null && Model.Any())
+    {
+        <div class="row" id="car-list">
+            @foreach (var item in Model)
+            {
+                var imagePath = $"~/images/{item.Model}.jpg";
+                <div class="col-md-4 mb-4 product-item" data-product-id="@item.CarId">
+                    <div class="card h-100">
+                        <img src="@Url.Content(imagePath)" class="card-img-top" alt="@item.Model" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Brand @item.Model</h5>
+                            <p class="card-text fw-bold">$@item.Price</p>
+                            <form method="get" asp-controller="Car" asp-action="Details">
+                                <input type="hidden" name="id" value="@item.CarId" />
+                                <button type="submit" class="btn btn-primary">Select</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No cars available.</p>
+    }
+</div>

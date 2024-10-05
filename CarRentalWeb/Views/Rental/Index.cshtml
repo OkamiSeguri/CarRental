@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BusinessObject.Rental>
+
+@{
+    ViewData["Title"] = "Rental List";
+}
+
+<h1>Rental List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@rental.FirstName</td>
+                <td>@rental.LastName</td>
+                <td>@rental.StartDate.ToShortDateString()</td>
+                <td>@rental.EndDate.ToShortDateString()</td>
+                <td>@rental.Price.ToString("C")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@rental.RentalId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@rental.RentalId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@rental.RentalId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create">Create New Rental</a>

@@ -1,0 +1,65 @@
+﻿@model BusinessObject.Car
+
+@{
+    ViewData["Title"] = "Car Details";
+}
+
+<div class="container mt-5">
+    <h1>Car Details</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>@Model.Model</h4>
+            <img src="@Url.Content($"~/images/{Model.Model}.jpg")" alt="@Model.Model" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Price, "{0:C}")
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IsAvailable)
+                </dt>
+                <dd class="col-sm-8">
+                    @(Model.IsAvailable ? "Available" : "Not Available")
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4">
+      
+
+        @* Back to List button that redirects to the Home Index *@
+        <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Back</a>
+
+        @* Rent Car button logic *@
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="btn btn-success" asp-action="Rent" asp-route-carId="@Model.CarId">Rent Car</a>
+        }
+        else
+        {
+            <a class="btn btn-success" asp-controller="Account" asp-action="Login">Rent Car</a>
+        }
+    </div>
+</div>
